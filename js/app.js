@@ -32,6 +32,15 @@ class Enemy {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 80);
   }
 
+  update(dt) {
+    this.posX = this.x > 5;
+    if(this.posX) {
+      this.x = -1;
+    }
+    else {
+      this.x += dt;
+    }
+  }
 }
 
 const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i+1));

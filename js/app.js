@@ -32,6 +32,7 @@ class Enemy {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 80);
   }
 
+  //Sets speed of enemy and resets to beginning when out of bounds
   update(dt) {
     this.posX = this.x > 5;
     if(this.posX) {
@@ -43,7 +44,6 @@ class Enemy {
   }
 }
 
-const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i+1));
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -59,18 +59,21 @@ class Hero {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
   }
 
+  //Keeps character from going out of bounds
   update(dt) {
     this.boundsX = this.x > 5;
+    this.bounsY = this.y < 1;
   }
+
+  
 }
 
-const player = new Hero();
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
-
+const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i+1));
+const player = new Hero();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

@@ -65,7 +65,17 @@ class Hero {
     this.bounsY = this.y < 1;
   }
 
-  
+  handleInput(input) {
+    switch(input) {
+      case 'left': this.x -= 1;
+      break;
+      case 'right': this.x += 1;
+      break;
+      case 'up': this.y -= 1.12;
+      break;
+      case 'down': this.y += 1.12;
+    }
+  }
 }
 
 

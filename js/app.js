@@ -62,18 +62,41 @@ class Hero {
   //Keeps character from going out of bounds
   update(dt) {
     this.boundsX = this.x > 5;
-    this.bounsY = this.y < 1;
+    this.boundsY = this.y < 1;
   }
 
   handleInput(input) {
     switch(input) {
-      case 'left': this.x -= 1;
+      case 'left':
+        if (this.x > 0) {
+          this.x -= 1;
+        } else {
+        }
       break;
-      case 'right': this.x += 1;
+
+      case 'right':
+        if (this.x < 4) {
+          this.x += 1;
+        } else {
+
+        }
       break;
-      case 'up': this.y -= 1.12;
+
+      case 'up':
+        if (this.y > 1) {
+          this.y -= 1.12;
+        } else {
+
+        }
       break;
-      case 'down': this.y += 1.12;
+
+      case 'down':
+        if (this.y < 5) {
+          this.y += 1.12;
+        } else {
+
+        }
+        break;
     }
   }
 }

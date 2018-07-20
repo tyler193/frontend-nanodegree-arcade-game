@@ -22,6 +22,15 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 */
+
+//Modal definition and 'play again' button action
+const modalPop = document.querySelector('.modal');
+const playButton = document.querySelector('.play-again');
+playButton.onclick = function() {
+  window.location.reload(true);
+}
+
+//enemy constructor
 class Enemy {
   constructor(x, y, spd) {
     this.x = x;
@@ -63,6 +72,7 @@ class Hero {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
   }
 
+  //game reset location
   reset() {
     this.x = 2;
     this.y = 4.851;
@@ -73,7 +83,14 @@ class Hero {
     for (let enemy of allEnemies) {
       if (this.y === enemy.y && (enemy.x > this.x - .5 && enemy.x < this.x + .5)) {
         this.reset();
+      } else {
       }
+    }
+    //check if player wins game
+    if (this.y < .5) {
+      modalPop.style.display = 'block';
+      win.cancelAnimationFrame(main);
+    } else {
     }
   }
 

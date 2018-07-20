@@ -1,3 +1,18 @@
 body {
     text-align: center;
 }
+
+/*
+* Modal pop up when game is won
+*/
+.modal {
+   display: none;
+   position: fixed;
+   z-index: 2;
+   left: 370px;
+   top: 55px;
+   width: 45%;
+   height: 70%;
+   overflow: auto;
+   background-color: rgb(255, 0, 0);
+ }

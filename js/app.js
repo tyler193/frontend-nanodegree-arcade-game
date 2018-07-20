@@ -78,7 +78,7 @@ class Hero {
     this.y = 4.851;
   }
 
-  //checks for collisions -- resets if collision
+  //checks for collisions -- resets if collision -- with a little help from Mathew Cranford's guide :)
   update() {
     for (let enemy of allEnemies) {
       if (this.y === enemy.y && (enemy.x > this.x - .5 && enemy.x < this.x + .5)) {

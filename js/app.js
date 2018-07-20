@@ -23,13 +23,16 @@ Enemy.prototype.render = function() {
 };
 */
 class Enemy {
-  constructor(x, y) {
+  constructor(x, y, spd) {
     this.x = x;
     this.y = y;
+    this.spd = spd;
     this.sprite = 'images/enemy-bug.png';
   }
+
+  //draws enemies with offset so they appear on game board
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 80);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
   }
 
   //Sets speed of enemy and resets to beginning when out of bounds
@@ -39,7 +42,7 @@ class Enemy {
       this.x = -1;
     }
     else {
-      this.x += dt;
+      this.x += this.spd * dt;
     }
   }
 }
@@ -51,20 +54,30 @@ class Enemy {
 class Hero {
   constructor () {
     this.x = 2;
-    this.y = 5;
+    this.y = 4.851;
     this.sprite = 'images/char-boy.png';
   }
 
+  //draws player with offset so it appears on game board
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
   }
 
-  //Keeps character from going out of bounds
-  update(dt) {
-    this.boundsX = this.x > 5;
-    this.boundsY = this.y < 1;
+  reset() {
+    this.x = 2;
+    this.y = 4.851;
   }
 
+  //checks for collisions -- resets if collision
+  update() {
+    for (let enemy of allEnemies) {
+      if (this.y === enemy.y && (enemy.x > this.x - .5 && enemy.x < this.x + .5)) {
+        this.reset();
+      }
+    }
+  }
+
+  //controls movement of player & keeps player in bounds
   handleInput(input) {
     switch(input) {
       case 'left':
@@ -83,16 +96,16 @@ class Hero {
       break;
 
       case 'up':
-        if (this.y > 1) {
-          this.y -= 1.12;
+        if (this.y > 0) {
+          this.y -= 1;
         } else {
 
         }
       break;
 
       case 'down':
-        if (this.y < 5) {
-          this.y += 1.12;
+        if (this.y < 4.851) {
+          this.y += 1;
         } else {
 
         }
@@ -105,8 +118,13 @@ class Hero {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [...Array(3)].map((_, i) => new Enemy(0, i+1));
+const allEnemies = [];
 const player = new Hero();
+
+const enemy1 = new Enemy(-1, .851, 3.5);
+const enemy2 = new Enemy(-1, 1.851, 4);
+const enemy3 = new Enemy(-1, 2.851, 3);
+allEnemies.push(enemy1, enemy2, enemy3);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
